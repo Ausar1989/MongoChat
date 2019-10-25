@@ -1,25 +1,28 @@
-<nav class="nav-extended card panel purple darken-4">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a class="waves-effect waves-light btn black" id ="home" href="/">Home</a></li>
-        <li><a class="waves-effect waves-light btn black" id ="saved" href="/">Saved Articles</a></li>
-        <li><a class="waves-effect waves-light btn black" id="DeleteArticles">Delete Articles</a></li>
-        <li><a class="waves-effect waves-light btn black" id="ScrapeArticles">Scrape Articles</a></li>
-      </ul>
+<nav>
+    <div class="nav-wrapper indigo darken-4 z-depth-5">
+        <a href="#!" class="brand-logo">Mongo Chat</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="home" href="/">Home</a></li>
+            <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="saved" href="/saved">Saved Articles</a></li>
+            <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="newScrape">SCRAPE NEW ARTICLES!</a></li>
+            <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="clearScrapedArticles">CLEAR SCRAPED ARTILCES</a></li>
+        </ul>
     </div>
-  </nav>
+</nav>
 
-   <ul class="sidenav" id="mobile-demo">
-    <li><a href="/">Home</a></li>
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="/">Homepage</a></li>
     <li><a href="/saved">Saved Articles</a></li>
   </ul>
 
-  <div class="container">
+<div class="container">
 <ul class="collapsible popout" id="scrapeResults">
     {{#each art}}
     {{/each}}
     
+</ul>
 
-  <script src="/js/index.js"></script>
+</div>
+
+<script src="/js/index.js"></script>

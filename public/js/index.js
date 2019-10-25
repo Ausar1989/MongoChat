@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $('.sidenav').sidenav();
-    $('.collapsible').collapsible();
+    $('.scrollspy').scrollSpy();
     $('.fixed-action-btn').floatingActionButton();
     $("#scrapeResults").empty();
-    initializeArticles();
+    initArticles();
 });
 
 var API = {
@@ -49,31 +49,31 @@ var API = {
     }
 };
 
-var initializeArticles = function () {
+var initArticles = function () {
     $("#scrapeResults").empty();
     API.init().then(function (data) {
         if (data.length > 0) {
-            var $arts = data.map(function (artic) {
+            var retrieval = data.map(function (artic) {
                 var $li = $("<li>");
 
-                var saveButton = $("<button>").addClass("btn-small waves-effect waves-light").attr("type", "submit").attr("name", "action").text("Save Article");
-                var headline = $("<div>").text(artic.title).addClass("collapsible-header");
+                var saveButton = $("<button>").addClass("btn-small waves-effect waves-light indigo right saveIt").attr("type", "submit").attr("name", "action").text("Save Article");
+                var title = $("<div>").text(artic.title).addClass("section scrollspy");
 
                 var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                var body = $("<div>").attr("data-id", artic._id).addClass("collapsible-body").append(span).append(saveButton);
+                var body = $("<div>").attr("data-id", artic._id).addClass("section scrollspy").append(span).append(saveButton);
 
-                $li.append(headline).append(body);
+                $li.append(title).append(body);
 
                 return $li;
             });
-            $("#scrapeResults").append($arts);
+            $("#scrapeResults").append(retrieval);
         }
         else {
             var $li = $("<li>");
 
-            var headline = $("<h5>").text("No More Articles. Get Scraping By Clicking The Button Above!").addClass("center-align");
+            var title = $("<h5>").text("No More Articles. Get Scraping By Clicking The Button Above!").addClass("center-align");
 
-            $li.append(headline);
+            $li.append(title);
             $("#scrapeResults").append($li);
         }
     });
@@ -83,27 +83,29 @@ var initializeArticles = function () {
 var newScrape = function () {
     $("#scrapeResults").empty();
     API.getScrape().then(function (data) {
+      
+
         API.init().then(function (data) {
             if (data.length > 0) {
-                var $arts = data.map(function (artic) {
+                var retrieval = data.map(function (artic) {
                     var $li = $("<li>");
     
                     var saveButton = $("<button>").addClass("btn-small waves-effect waves-light indigo right saveIt").attr("type", "submit").attr("name", "action").text("Save Article");
-                    var title = $("<div>").text(artic.title).addClass("collapsible-header");
+                    var title = $("<div>").text(artic.title).addClass("section scrollspy");
     
                     var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                    var body = $("<div>").attr("data-id", artic._id).addClass("collapsible-body").append(span).append(saveButton);
+                    var body = $("<div>").attr("data-id", artic._id).addClass("section scrollspy").append(span).append(saveButton);
     
                     $li.append(title).append(body);
     
                     return $li;
                 });
-                $("#scrapeResults").append($arts);
+                $("#scrapeResults").append(retrieval);
             }
             else {
                 var $li = $("<li>");
     
-                var title = $("<h5>").text("Out of Articles. Scrape some new ones By Clicking The Button Above!").addClass("center-align");
+                var title = $("<h5>").text("No More Articles. Get Scraping By Clicking The Button Above!").addClass("center-align");
     
                 $li.append(title);
                 $("#scrapeResults").append($li);
@@ -117,20 +119,20 @@ var deleteAllScraped = function () {
         $("#scrapeResults").empty();
         API.init().then(function (data) {
             if (data.length > 0) {
-                var $arts = data.map(function (artic) {
+                var retrieval = data.map(function (artic) {
                     var $li = $("<li>");
     
                     var saveButton = $("<button>").addClass("btn-small waves-effect waves-light indigo right saveIt").attr("type", "submit").attr("name", "action").text("Save Article");
-                    var title = $("<div>").text(artic.title).addClass("collapsible-header");
+                    var title = $("<div>").text(artic.title).addClass("section scrollspy");
     
                     var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                    var body = $("<div>").attr("data-id", artic._id).addClass("collapsible-body").append(span).append(saveButton);
+                    var body = $("<div>").attr("data-id", artic._id).addClass("section scrollspy").append(span).append(saveButton);
     
                     $li.append(title).append(body);
     
                     return $li;
                 });
-                $("#scrapeResults").append($arts);
+                $("#scrapeResults").append(retrieval);
             }
             else {
                 var $li = $("<li>");
@@ -155,20 +157,20 @@ var saveArticle = function () {
             $("#scrapeResults").empty();
             API.init().then(function (data) {
                 if (data.length > 0) {
-                    var $arts = data.map(function (artic) {
+                    var retrieval = data.map(function (artic) {
                         var $li = $("<li>");
         
                         var saveButton = $("<button>").addClass("btn-small waves-effect waves-light indigo right saveIt").attr("type", "submit").attr("name", "action").text("Save Article");
-                        var title = $("<div>").text(artic.title).addClass("collapsible-header");
+                        var title = $("<div>").text(artic.title).addClass("section scrollspy");
         
                         var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                        var body = $("<div>").attr("data-id", artic._id).addClass("collapsible-body").append(span).append(saveButton);
+                        var body = $("<div>").attr("data-id", artic._id).addClass("section scrollspy").append(span).append(saveButton);
         
                         $li.append(title).append(body);
         
                         return $li;
                     });
-                    $("#scrapeResults").append($arts);
+                    $("#scrapeResults").append(retrieval);
                 }
                 else {
                     var $li = $("<li>");
@@ -182,16 +184,15 @@ var saveArticle = function () {
         });
     });
 
-    
+   
 };
 
 
 
-// Grab the articles as a json
+
 $.getJSON("/articles", function (data) {
-    // For each one
     for (var i = 0; i < data.length; i++) {
-        // Display the apropos information on the page
+        
         $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
     }
 });
@@ -200,29 +201,29 @@ $.getJSON("/articles", function (data) {
 
 
 
-
+// Whenever someone clicks a p tag
 $(document).on("click", "p", function () {
-    
-    $("#notes").empty();
-    
+    // Empty the notes from the note section
+    $("#comment").empty();
+    // Save the id from the p tag
     var thisId = $(this).attr("data-id");
 
-    
+    // Now make an ajax call for the Article
     $.ajax({
         method: "GET",
         url: "/articles/" + thisId
     })
-        
+        // With that done, add the note information to the page
         .then(function (data) {
             console.log(data);
             // The title of the article
-            $("#notes").append("<h2>" + data.title + "</h2>");
+            $("#comment").append("<h2>" + data.title + "</h2>");
             // An input to enter a new title
-            $("#notes").append("<input id='titleinput' name='title' >");
+            $("#comment").append("<input id='titleinput' name='title' >");
             // A textarea to add a new note body
-            $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+            $("#comment").append("<textarea id='bodyinput' name='body'></textarea>");
             // A button to submit a new note, with the id of the article saved to it
-            $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+            $("#comment").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
 
             // If there's a note in the article
             if (data.note) {
@@ -234,31 +235,31 @@ $(document).on("click", "p", function () {
         });
 });
 
-
+// When you click the savenote button
 $(document).on("click", "#saveComment", function () {
-    
+    // Grab the id associated with the article from the submit button
     var thisId = $(this).attr("data-id");
 
-
+    // Run a POST request to change the note, using what's entered in the inputs
     $.ajax({
         method: "POST",
         url: "/articles/" + thisId,
         data: {
-    
+            // Value taken from title input
             title: $("#titleinput").val(),
-            
+            // Value taken from note textarea
             body: $("#bodyinput").val()
         }
     })
         // With that done
         .then(function (data) {
-            
+            // Log the response
             console.log(data);
-            
-            $("#notes").empty();
+            // Empty the notes section
+            $("#comment").empty();
         });
 
-
+    // Also, remove the values entered in the input and textarea for note entry
     $("#titleinput").val("");
     $("#bodyinput").val("");
 });

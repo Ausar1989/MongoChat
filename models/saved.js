@@ -7,12 +7,12 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var SaveSchema = new Schema({
   // `title` is required and of type String
-  headline: {
+  title: {
     type: String,
     required: true
   },
   // `link` is required and of type String
-  URL: {
+  link: {
     type: String,
     required: true
   },
@@ -20,14 +20,17 @@ var SaveSchema = new Schema({
     type: String,
     required: true
   },
-  
+  // `note` is an object that stores a Note id
+  // The ref property links the ObjectId to the Note model
+  // This allows us to populate the Article with an associated Note
   note: {
     type: Schema.Types.ObjectId,
     ref: "Note"
   }
 });
 
-var saved = mongoose.model("Saved", SaveSchema);
+// This creates our model from the above schema, using mongoose's model method
+var Save = mongoose.model("Saved", SaveSchema);
 
-
-module.exports = saved;
+// Export the Article model
+module.exports = Save;

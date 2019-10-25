@@ -1,11 +1,11 @@
 <nav>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">MongoChat</a>
+  <div class="nav-wrapper indigo darken-4">
+    <a href="#!" class="brand-logo">Mongo Chat</a>
     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
-      <li><a id="home" href="/">Home</a></li>
-      <li><a id="saved" href="/saved">Saved Articles</a></li>
-      <li><a class="waves-effect waves-light btn" id="clearSavedArticles">CLEAR SAVED ARTICLES</a></li>
+      <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="home" href="/">Homepage</a></li>
+      <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="saved" href="/saved">Saved Articles</a></li>
+      <li><a class="waves-effect waves-light btn yellow accent-2 black-text" id="deleteSavedArticles">DELETE SAVED ARTICLES</a></li>
     </ul>
   </div>
 </nav>
@@ -21,16 +21,16 @@
 
 
     <div id="previousComments">
-    {{#each Comment}}
+    {{#each comment}}
     {{/each}}
     </div>
 
-<div class="row">
+    <div class="row">
       <form class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea1" class="cirlce"></textarea>
-            <label for="textarea1">Comment:</label>
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1">comment:</label>
           </div>
         </div>
       </form>
@@ -45,8 +45,8 @@
   <ul class="collapsible popout" id="savedResults">
     {{#each save}}
     {{/each}}
+  </ul>
 
-  <ul> 
 </div>
 
 <script src="/js/saved.js"></script>

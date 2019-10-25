@@ -1,6 +1,6 @@
-(document).ready(function () {
+$(document).ready(function () {
     $('.sidenav').sidenav();
-    $('.collapsible').collapsible();
+    $('.scrollspy').scrollSpy();
     $('.fixed-action-btn').floatingActionButton();
     $('.modal').modal();
 
@@ -8,7 +8,7 @@
 });
 
 var API = {
-    getScrape: function () {
+    scrape: function () {
         return $.ajax({
             url: "api/scrape",
             type: "GET"
@@ -20,13 +20,13 @@ var API = {
             type: "GET"
         });
     },
-    getSaves: function () {
+    saves: function () {
         return $.ajax({
             url: "api/saved",
             type: "GET"
         });
     },
-    getArticle: function (id) {
+    retreiveInfo: function (id) {
         return $.ajax({
             url: "api/articles/" + id,
             type: "GET"
@@ -66,7 +66,7 @@ var API = {
             type: "DELETE"
         });
     },
-    deleteNoteYeah: function (id) {
+    deleteNoteNow: function (id) {
         return $.ajax({
             url: "api/notes/" + id,
             type: "DELETE"
@@ -97,23 +97,23 @@ var API = {
 
 var initSaved = function () {
     $("#savedResults").empty();
-    API.getSaves().then(function (data) {
+    API.saves().then(function (data) {
         console.log(data);
         if (data.length > 0) {
             var $saves = data.map(function (artic) {
                 var $li = $("<li>");
     
                 var deleteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light right deleteIt").attr("type", "submit").attr("name", "action").text("Delete From Saved");
-                var noteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light modal-trigger right indigo addNote").attr("type", "submit").attr("name", "action").text("Add Note").attr("data-target", "modal1");
+                var noteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light modal-trigger right indigo addNote").attr("type", "submit").attr("name", "action").text("Apply Comment").attr("data-target", "modal1");
     
-                var headline = $("<div>").text(artic.headline).addClass("collapsible-header");
+                var title = $("<div>").text(artic.title).addClass("section scrollspy");
     
                 var buttonDiv = $("<div>").attr("data-id", artic._id).append(deleteButton).append(noteButton)
     
                 var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                var body = $("<div>").addClass("collapsible-body").append(span).append(buttonDiv);
+                var body = $("<div>").addClass("section scrollspy").append(span).append(buttonDiv);
     
-                $li.append(headline).append(body);
+                $li.append(title).append(body);
     
                 return $li;
             });
@@ -135,20 +135,20 @@ var initSaved = function () {
 var deleteAllSaved = function () {
     API.deleteAllSavedArt().then(function () {
         $("#savedResults").empty();
-        API.getSaves().then(function (data) {
+        API.saves().then(function (data) {
             if (data.length > 0) {
                 var $saves = data.map(function (artic) {
                     var $li = $("<li>");
         
                     var deleteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light right deleteIt").attr("type", "submit").attr("name", "action").text("Delete From Saved");
-                    var noteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light modal-trigger right indigo addNote").attr("type", "submit").attr("name", "action").text("Add Note").attr("data-target", "modal1");
+                    var noteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light modal-trigger right indigo addNote").attr("type", "submit").attr("name", "action").text("Apply Comment").attr("data-target", "modal1");
         
-                    var title = $("<div>").text(artic.title).addClass("collapsible-header");
+                    var title = $("<div>").text(artic.title).addClass("section scrollspy");
         
                     var buttonDiv = $("<div>").attr("data-id", artic._id).append(deleteButton).append(noteButton)
         
                     var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                    var body = $("<div>").addClass("collapsible-body").append(span).append(buttonDiv);
+                    var body = $("<div>").addClass("section scrollspy").append(span).append(buttonDiv);
         
                     $li.append(title).append(body);
         
@@ -179,20 +179,20 @@ var deleteSavedArt = function () {
     console.log(id);
     API.deleteSaved(id).then(function (dataTwo) {
         $("#savedResults").empty();
-        API.getSaves().then(function (data) {
+        API.saves().then(function (data) {
             if (data.length > 0) {
                 var $saves = data.map(function (artic) {
                     var $li = $("<li>");
         
                     var deleteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light right deleteIt").attr("type", "submit").attr("name", "action").text("Delete From Saved");
-                    var noteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light modal-trigger right indigo addNote").attr("type", "submit").attr("name", "action").text("Add Note").attr("data-target", "modal1");
+                    var noteButton = $("<button>").addClass("buttonMargin btn-small waves-effect waves-light modal-trigger right indigo addNote").attr("type", "submit").attr("name", "action").text("Apply Comment").attr("data-target", "modal1");
         
-                    var title = $("<div>").text(artic.title).addClass("collapsible-header");
+                    var title = $("<div>").text(artic.title).addClass("section scrollspy");
         
                     var buttonDiv = $("<div>").attr("data-id", artic._id).append(deleteButton).append(noteButton)
         
                     var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
-                    var body = $("<div>").addClass("collapsible-body").append(span).append(buttonDiv);
+                    var body = $("<div>").addClass("").append(span).append(buttonDiv);
         
                     $li.append(title).append(body);
         
@@ -204,7 +204,7 @@ var deleteSavedArt = function () {
             else {
                 var $li = $("<li>");
     
-                var title = $("<h5>").text("You didn't save any articles. Return To The Homepage and scrape!").addClass("center-align");
+                var title = $("<h5>").text("No Saved Articles. Go To The Home Page and Get Scraping!").addClass("center-align");
     
                 $li.append(title);
                 $("#savedResults").append($li);
@@ -223,8 +223,8 @@ var addNote = function () {
     var id = $(this).parent().attr("data-id");
     API.getSavedArticle(id).then(function (data) {
         console.log(data);
-        
-        $("#saveNote").attr("data-id", data._id);
+        // console.log(data._id);
+        $("#saveComment").attr("data-id", data._id);
         $("#modalHeader").append($("<h5>").text(data.title));
 
         var $row = $("<row>").append($("<div>").addClass("col s10").append($("<h6>").text(data.note.body)));
@@ -238,6 +238,7 @@ var addNote = function () {
 };
 
 var saveNewNote = function () {
+
     var id = $(this).attr("data-id");
     console.log(id);
     var note = $("#textarea1").val().trim();
@@ -255,7 +256,7 @@ var deleteNote = function () {
     var id = $(this).parent().attr("note-id");
 
     console.log(id);
-    API.deleteNoteYeah(id).then(function () {
+    API.deleteNoteNow(id).then(function () {
     });
 
     $("#modalHeader").empty();
@@ -267,8 +268,7 @@ var deleteNote = function () {
     var idTwo = $(this).parent().attr("data-id");
     API.getSavedArticle(idTwo).then(function (data) {
         console.log(data);
-        // console.log(data._id);
-        $("#saveNote").attr("data-id", data._id);
+        $("#saveComment").attr("data-id", data._id);
         $("#modalHeader").append($("<h5>").text(data.title));
 
         var $row = $("<row>").append($("<div>").addClass("col s10").append($("<h6>").text(data.note.body)));
@@ -283,10 +283,10 @@ var deleteNote = function () {
 
 $("#savedResults").on("click", ".deleteIt", deleteSavedArt);
 
-$("#clearSavedArticles").on("click", deleteAllSaved);
+$("#deleteSavedArticles").on("click", deleteAllSaved);
 
 $("#savedResults").on("click", ".addNote", addNote);
 
-$("#saveNote").on("click", saveNewNote);
+$("#saveComment").on("click", saveNewNote);
 
 $("#previousComments").on("click", ".red", deleteNote);
