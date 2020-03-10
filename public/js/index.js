@@ -58,7 +58,7 @@ var initArticles = function () {
 
                 var saveButton = $("<button>").addClass("btn-small waves-effect waves-light indigo right saveIt").attr("type", "submit").attr("name", "action").text("Save Article");
                 var title = $("<div>").text(artic.title).addClass("section scrollspy");
-
+            
                 var span = $("<a>").attr("href", artic.link).attr("target", "_blank").append($("<span>").text(artic.summary));
                 var body = $("<div>").attr("data-id", artic._id).addClass("section scrollspy").append(span).append(saveButton);
 

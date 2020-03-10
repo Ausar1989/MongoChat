@@ -17,9 +17,11 @@ module.exports = function (app) {
             result.title = $(this).find(".title").text();
             result.link = $(this).find(".title").parent().attr("href");
             result.summary = $(this).find(".teaser").text();
+            result.image = $(this).find(".title").find("img").parent().attr("data-img");
+        
 
 
-            db.Article.remove({}, function(err) {
+            db.Article.remove({}, function(err) {           
                 if (err) {
                     console.log(err)
                 }
