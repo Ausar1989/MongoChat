@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## MongoChat
 This App Lets Users Leave Comments and read material from various news sites. It scrapes targeted content
 from news outlets and display them to the client. It also, simultaneously stores information in the noSQL
