@@ -14,7 +14,7 @@ This is an image of scraped artices:
 ![Articles](public/images/Mongopic.png)
 
 This is an image of saved articles:
-![Saved](publics/images/Mongopic.png)
+![Saved](public/images/Mongopic3.png)
 
 ### Technologies Used
 
