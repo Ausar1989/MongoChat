@@ -34,7 +34,7 @@ This is an image of saved articles:
 ###### Database
  1. Mongo
 
- Have a wonderful day
+ Have a wonderful day!
 
 
 
